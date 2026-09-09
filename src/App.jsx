@@ -1,12 +1,15 @@
 import Sidebar from './components/Sidebar';
 import Player from './components/Player';
-import PlaylistGrid from './components/PlaylistGrid';
 import Gretting from './components/Gretting';
 import Badge from './components/Badge';
 
+//Hooks
+import likeButton from './components/likeButton';
+
 //Falsa API sendo importada
 import { playlistData } from './data/mockData';
-import PlaylistCard from './components/PlaylistCard';
+import generos from './data/generos';
+import PlaylistCard from './components/PlaylistCard'
 
 function App() {
 
@@ -20,9 +23,14 @@ function App() {
 
       <main class="flex-1 bg-zinc-900 rounded-lg m-2 p-6 overflow-y-auto">
         
-         
+        <div className='flex gap-3'>
+               {generos.map(genero => (
+               <span className='rounded-full px-4 py-2 bg-zinc-700 hover:scale-105 transition-transform hover:bg-green-400' key={genero}>{genero}</span>
+           ))}
+        </div>
 
         <Gretting name={"Natan"}/>
+
         <Badge count={5}/>
 
          <p className='text-zinc-400'> Seus álbuns seram exibidos aqui!</p>
@@ -32,7 +40,8 @@ function App() {
           
           {/* Container para os cards*/}
           <div className='flex flex-wrap gap-6'>
-            { playlistData.map(playlist => (
+            { playlistData.filter(item => item.type === "podcast")
+            .map(playlist => (
               <PlaylistCard
               key={playlist.id}
               title={playlist.title}
@@ -43,6 +52,8 @@ function App() {
           </div>
 
          </section>
+         <h2>Teste Botão curtir</h2>
+         <likeButton/>
 
       </main>
 

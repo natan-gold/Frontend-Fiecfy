@@ -1,5 +1,6 @@
 import Avatar from "./Avatar";
 import LoginButton from "./LoginButton";
+import menuItems from "../data/menuItems";
 
 function Sidebar () {
     return (
@@ -17,17 +18,14 @@ function Sidebar () {
             </nav>
             
             <nav className="flex flex-col gap-4">
-                <a href="#" className='flex items-center gap-4 text-zinc-400 hover:text-white transition-colors font-semibold'>
-                    <div className="w-6 h-6 bg-zinc-400 rounded-sm"></div> Início
-                </a>
 
-                <a href="#" className=' flex items-center gap-4 text-zinc-400 hover:text-white transition-colors font-semibold'>
-                    <div className="w-6 h-6 bg-zinc-400 rounded-sm"></div> Buscar
-                </a>
 
-                <a href="#" className=' flex items-center gap-4 text-zinc-400 hover:text-white transition-colors font-semibold'>
-                    <div className="w-6 h-6 bg-zinc-400 rounded-sm"></div> Sua Biblioteca
-                </a>
+                  {menuItems.map(item => (
+                <a href="#" key={item.id} className={item.iconClass}>
+                    <div className="w-6 h-6 bg-zinc-400 rounded-sm"></div> <span>{item.label}</span>
+                </a>   
+            ))}
+
             </nav>
         </aside>
     );
