@@ -1,6 +1,22 @@
 import BarradeProgresso from "./ProgressBar";
-let caractere = ">"
+
+import { useState } from "react";
+
+import { Play } from 'lucide-react';
+import { Pause } from 'lucide-react';
+
 function Player () {
+
+    let caracterMaior = '>'
+     let caracterMenor = '<'
+
+    const [isPlaying, steIsPlaying] = useState(false)
+
+    function togglePlay() {
+
+        steIsPlaying(!isPlaying);
+    }
+    
     return (
         
         <footer className=" h-20 bg-blacl bolder-t border-zinc-800 px-4 flex items-center justify-center font-bold hover:scale-100 transition-transform">
@@ -16,15 +32,16 @@ function Player () {
 
             <div className="flex items-center justify-center w-1/3 gap-6">
                 <button className="w-8 h-8 rounded-full justify-center bg-white text-black hover:scale-105 transition-transform hover:bg-green-400">
-                    <i className="bi bi-skip-start-fill"></i>
+                    <i className="bi bi-skip-start-fill"> {caracterMenor}</i> 
+                </button>
+
+                <button className=" flex items-center w-8 h-8 rounded-full justify-center bg-white text-black hover:scale-105 transition-transform  hover:bg-green-400"
+                        onClick={togglePlay}>
+                            {isPlaying ? <Play/> : <Pause/>}
                 </button>
 
                 <button className="w-8 h-8 rounded-full justify-center bg-white text-black hover:scale-105 transition-transform  hover:bg-green-400">
-                    <i className="bi bi-pause-fill"></i>
-                </button>
-
-                <button className="w-8 h-8 rounded-full justify-center bg-white text-black hover:scale-105 transition-transform  hover:bg-green-400">
-                     <i className="bi bi-skip-end-fill"></i>
+                     <i className="bi bi-skip-end-fill">{caracterMaior}</i>
                 </button>
             </div>
 

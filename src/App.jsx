@@ -4,7 +4,7 @@ import Gretting from './components/Gretting';
 import Badge from './components/Badge';
 
 //Hooks
-import likeButton from './components/likeButton';
+import LikeButton from './components/likeButton';
 
 //Falsa API sendo importada
 import { playlistData } from './data/mockData';
@@ -40,7 +40,7 @@ function App() {
           
           {/* Container para os cards*/}
           <div className='flex flex-wrap gap-6'>
-            { playlistData.filter(item => item.type === "podcast")
+            { playlistData.filter(item => item.type === "albums")
             .map(playlist => (
               <PlaylistCard
               key={playlist.id}
@@ -52,8 +52,12 @@ function App() {
           </div>
 
          </section>
-         <h2>Teste Botão curtir</h2>
-         <likeButton/>
+
+         <div className='flex flex-row  gap=10 w-100 m-2 text-ls items-center justify-around'> 
+
+         <LikeButton className="w-10 h-10 rounded-2xl"
+         />
+         </div>
 
       </main>
 
