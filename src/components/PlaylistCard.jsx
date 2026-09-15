@@ -1,3 +1,5 @@
+import LikeButton from "./likeButton"
+
 function PlaylistCard ({ title, description, coverUrl}) {
     return (
         <>
@@ -11,6 +13,9 @@ function PlaylistCard ({ title, description, coverUrl}) {
             <h2> {title}</h2>
 
             <p> {description} </p>
+
+         <LikeButton className="flex  w-10 h-10 rounded-2xl"
+         />
         </div>
         </>
     )

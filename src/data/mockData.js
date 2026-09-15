@@ -4,7 +4,7 @@ export const playlistData = [
         title:"Racionais",
         description:"Racionais Mcs e mais.",
         coverUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDCeeJm_mTFKaPO3Gm6Ds6VlrNRDgZO_QLQtA2ULUL8A&s=10",
-        type: "albums"
+        type: "album"
     },
     {
         id: 2,
@@ -18,7 +18,7 @@ export const playlistData = [
         title:"Rock",
         description:"Rock pesado, AC/DC, Slipknot, Sistema of a down e mais..",
         coverUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX1RhQHdOooes22gJinDPILVK6NhRiE2rVIRtC87AKQg&s=10",
-        type:"albums"
+        type:"album"
     },  
     {
         id: 4,

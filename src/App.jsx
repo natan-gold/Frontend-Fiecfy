@@ -10,6 +10,8 @@ import LikeButton from './components/likeButton';
 import { playlistData } from './data/mockData';
 import generos from './data/generos';
 import PlaylistCard from './components/PlaylistCard'
+import { useState } from 'react';
+
 
 function App() {
 
@@ -22,12 +24,7 @@ function App() {
           <Sidebar/>
 
       <main class="flex-1 bg-zinc-900 rounded-lg m-2 p-6 overflow-y-auto">
-        
-        <div className='flex gap-3'>
-               {generos.map(genero => (
-               <span className='rounded-full px-4 py-2 bg-zinc-700 hover:scale-105 transition-transform hover:bg-green-400' key={genero}>{genero}</span>
-           ))}
-        </div>
+
 
         <Gretting name={"Natan"}/>
 
@@ -40,7 +37,7 @@ function App() {
           
           {/* Container para os cards*/}
           <div className='flex flex-wrap gap-6'>
-            { playlistData.filter(item => item.type === "albums")
+            { playlistData.filter(item => item.type === "podcast")
             .map(playlist => (
               <PlaylistCard
               key={playlist.id}
@@ -48,15 +45,13 @@ function App() {
               description={playlist.description}
               coverUrl={playlist.coverUrl} />
             )) }
-
           </div>
 
          </section>
 
          <div className='flex flex-row  gap=10 w-100 m-2 text-ls items-center justify-around'> 
 
-         <LikeButton className="w-10 h-10 rounded-2xl"
-         />
+         
          </div>
 
       </main>

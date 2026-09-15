@@ -1,8 +1,7 @@
 import { useState } from "react"
 
 {/* Icones */}
-import { ThumbsUp } from 'lucide-react';
-import { ThumbsDown } from "lucide-react";
+import { Heart } from 'lucide-react';
 
 const LikeButton = () => {
     //Cria o estado (Valor inicial = false (pode ser true também))
@@ -16,9 +15,9 @@ const LikeButton = () => {
     return(
         <div className=" w-6 h-6 flex items-center justify-center">
         
-        <button className = {isLiked ? ("bg-red-500 text-black px-3 py-2 rounded-2xl") : ("bg-green-400 text-white px-3 py-2 rounded-2xl")} onClick={togleLike}>
+        <button className = {isLiked ? ("bg-green-400 text-white px-3 py-2 rounded-2xl") : ("bg-red-400 text-white px-3 py-2 rounded-2xl")} onClick={togleLike}>
 
-             {isLiked ? "Descurtir" : "Curtir"}
+             {isLiked ? <Heart/> : <Heart/>}
 
         </button>
 
