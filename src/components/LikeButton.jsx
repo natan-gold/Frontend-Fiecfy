@@ -1,7 +1,8 @@
 import { useState } from "react"
 
 {/* Icones */}
-import { Heart } from 'lucide-react';
+import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 
 const LikeButton = () => {
     //Cria o estado (Valor inicial = false (pode ser true também))
@@ -17,7 +18,7 @@ const LikeButton = () => {
         
         <button className = {isLiked ? ("bg-green-400 text-white px-3 py-2 rounded-2xl") : ("bg-red-400 text-white px-3 py-2 rounded-2xl")} onClick={togleLike}>
 
-             {isLiked ? <Heart/> : <Heart/>}
+             {isLiked ? <FaHeart />: <FaRegHeart/>}
 
         </button>
 

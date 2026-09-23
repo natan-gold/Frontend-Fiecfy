@@ -3,17 +3,31 @@ import Player from './components/Player';
 import Gretting from './components/Gretting';
 import Badge from './components/Badge';
 
-//Hooks
-import LikeButton from './components/likeButton';
-
 //Falsa API sendo importada
-import { playlistData } from './data/mockData';
-import generos from './data/generos';
 import PlaylistCard from './components/PlaylistCard'
 import { useState } from 'react';
-
+import { useEffect } from 'react';
 
 function App() {
+
+  const [playlists, setPlaylists] = useState([])
+
+  const[isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    async function dados() {
+      const puxarDados = await fetch('https://jsonplaceholder.typicode.com/albums/1/photos')
+      const dadosConvertidos = await puxarDados.json()
+
+      console.log(dadosConvertidos)
+
+      setPlaylists(dadosConvertidos.slice(0,12))
+
+      setIsLoading(false)
+    }
+    dados()
+  }, [])
+
 
   return (
      <div className='flex flex-col h-screen bg-black text-white'>
@@ -23,7 +37,7 @@ function App() {
         {/*Barra lateral tem que ser fixada*/ }
           <Sidebar/>
 
-      <main class="flex-1 bg-zinc-900 rounded-lg m-2 p-6 overflow-y-auto">
+      <main className="flex-1 bg-zinc-900 rounded-lg m-2 p-6 overflow-y-auto">
 
 
         <Gretting name={"Natan"}/>
@@ -36,23 +50,29 @@ function App() {
           <h2 className='text2xl font-bold text-white mb-6'>Feito para Natan</h2>
           
           {/* Container para os cards*/}
-          <div className='flex flex-wrap gap-6'>
-            { playlistData.filter(item => item.type === "podcast")
-            .map(playlist => (
-              <PlaylistCard
-              key={playlist.id}
-              title={playlist.title}
-              description={playlist.description}
-              coverUrl={playlist.coverUrl} />
-            )) }
+          <div>
+           
+     {isLoading ? (
+        <i className="fa-solid fa-spinner fa-spin text-2xl gap-10 "></i>
+       ) : (
+        <div className='flex flex-row flex-wrap gap-4 w-100 m-2 text-ls items-center justify-around'> 
+     
+            {playlists.map((playlist) => {
+             return(
+               <PlaylistCard
+                key={playlist.id}
+                title={playlist.title}
+                coverUrl={playlist.url}
+               />
+          )
+         })}
+        </div> 
+       )}
+
           </div>
 
          </section>
 
-         <div className='flex flex-row  gap=10 w-100 m-2 text-ls items-center justify-around'> 
-
-         
-         </div>
 
       </main>
 
