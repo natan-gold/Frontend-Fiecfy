@@ -2,13 +2,12 @@ import Sidebar from './components/Sidebar';
 import Player from './components/Player';
 import Gretting from './components/Gretting';
 import Badge from './components/Badge';
+import Apifetch from './components/ApiFetch';
 
 //Falsa API sendo importada
 import PlaylistCard from './components/PlaylistCard'
 import { useState } from 'react';
-import { useEffect } from 'react';
 
-import { CgDanger } from "react-icons/cg";
 
 function App() {
 
@@ -16,53 +15,13 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(true)
 
-  const [erro, setErro] = useState(null)
-
-  useEffect(() => {
-    async function dados() {
-
-      try {
-        const puxarDados = await fetch('https://jsonplaceholder.typicode.com/albums/1/photos')
-        const dadosConvertidos = await puxarDados.json()
-        console.log(dadosConvertidos)
-        setPlaylists(dadosConvertidos.slice(0, 12))
-
-      }
-      catch (erro) {
-        console.error('Não foi possível conectar ao servidor', erro)
-
-      }
-      finally {
-        setIsLoading(false);
-
-      }
-    }
-    dados()
-  }, [])
-
+  const [searchTerm, setSearchTerm] = useState('')
 
   return (
     <>
-      <div className='flex h-screen w-screen absolute justify-center items-center z-50 backdrop-blur-sm bg-black/50 text-red-500'>
-        <div className='flex flex-col inset-0 bg-[#4f0000a0] h-70 w-110 rounded-2xl border-2 border-red-500'>
-          <span className='flex justify-end mr-5'>
-            <button className='text-2xl font-bold cursor-pointer'>
-            X
-            </button>
-          </span>
-          <div className='flex flex-col justify-center items-center'>
-            <h1 className='text-white text-4xl font-bold'>
-              Erro 500
-            </h1>
 
-            <div>
-              <CgDanger className='w-32 h-32' />
-              <p className='text-xl '>Erro no servidor</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <Apifetch/>
+    
       <div className='flex flex-col h-screen bg-black text-white'>
         <div className='flex flex-1 overflow-hidden'>
           {/*Os componentes serão chamados abaixo*/}
@@ -82,6 +41,11 @@ function App() {
             <section>
               <h2 className='text2xl font-bold text-white mb-6'>Feito para Natan</h2>
 
+              <input className="bg-zinc-800 p-2 rounded-lg mb-4"
+                type="text"
+                placeholder="Pesquisar álbum..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}/>
               {/* Container para os cards*/}
               <div>
 
@@ -90,15 +54,16 @@ function App() {
                 ) : (
                   <div className='flex flex-row flex-wrap gap-4 w-100 m-2 text-ls items-center justify-around'>
 
-                    {playlists.map((playlist) => {
-                      return (
-                        <PlaylistCard
-                          key={playlist.id}
-                          title={playlist.title}
-                          coverUrl={playlist.url}
-                        />
-                      )
-                    })}
+                    {playlists .filter(album => album.title 
+                    .toLowerCase() 
+                    .includes(searchTerm.toLowerCase())
+                    ).map((album) => 
+                    { return( 
+                    <PlaylistCard 
+                    key={album.id} 
+                    title={album.title} 
+                    coverUrl={album.url} 
+                    /> ) }) }
                   </div>
                 )}
 
