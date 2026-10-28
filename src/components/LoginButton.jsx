@@ -5,5 +5,4 @@ function LoginButton () {
         </button>
     )
 }
-
 export default LoginButton

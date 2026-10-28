@@ -1,7 +1,7 @@
-function Gretting ({ name }) {
+function Welcome ({ name }) {
     return(
         <h1 className="text-2xl font-bold mb-6">Boa tarde, {name}</h1>
     )
 }
 
-export default Gretting
+export default Welcome

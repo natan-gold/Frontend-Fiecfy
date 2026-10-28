@@ -1,123 +1,99 @@
-import Avatar from "./Avatar";
-import LoginButton from "./LoginButton";
 import SidebarItem from "./SidebarItem";
-
 import { useState } from "react";
-
 import { playlistData } from "../data/mockData";
 
 // Icons
 import { FaHouseChimney } from "react-icons/fa6";
-import { FaSearch } from "react-icons/fa";
-import { FaBook } from "react-icons/fa";
+import { FaSearch, FaBook, FaPlus, FaArrowRight } from "react-icons/fa";
 
+// Navegação principal (box de cima, igual ao "Home / Search" do vídeo)
 const menuItems = [
-    {
-        id: 1,
-        label: "Início",
-        iconClass: <FaHouseChimney />
-    },
-    {
-        id: 2,
-        label: "Buscar",
-        iconClass: <FaSearch />
-    },
-    {
-        id: 3,
-        label: "Biblioteca",
-        iconClass: <FaBook />
-    }
+    { id: 1, label: "Início", iconClass: <FaHouseChimney /> },
+    { id: 2, label: "Buscar", iconClass: <FaSearch /> },
 ];
 
 function Sidebar() {
-
-    const [notificacoes, setNotificacoes] = useState(3);
-
-    // Expandir a Biblioteca
-    const [IsExpanded, setIsExpanded] = useState(false);
-
-    function Expandir() {
-        setIsExpanded(!IsExpanded);
-    }
+   
+    const [isExpanded, setIsExpanded] = useState(true);
 
     return (
-        <aside className="w-72 bg-black p-6 flex flex-col gap-6">
+    
+        <aside className="w-[25%] h-full p-2 flex flex-col gap-2 text-white hidden lg:flex">
 
-            <nav className="flex flex-col gap-3">
+            <nav className="bg-[#121212] h-[15%] rounded flex flex-col justify-around">
+                {menuItems.map(item => (
+                    <SidebarItem
+                        key={item.id}
+                        label={item.label}
+                        iconClass={item.iconClass}
+                    />
+                ))}
+            </nav>
 
-                <Avatar />
+         
+            <section className="bg-[#121212] h-[85%] rounded flex flex-col overflow-hidden">
 
-                <div>
-                    <LoginButton />
+                {/* Cabeçalho: título à esquerda, ações à direita */}
+                <div className="p-4 flex items-center justify-between">
+                    <button
+                        onClick={() => setIsExpanded(!isExpanded)}
+                        className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors cursor-pointer"
+                    >
+                        <FaBook className="w-5 h-5" />
+                        <p className="font-semibold">Sua Biblioteca</p>
+                    </button>
+
+                    <div className="flex items-center gap-3 text-zinc-400">
+                        <FaArrowRight className="w-4 h-4 cursor-pointer hover:text-white transition-colors" />
+                        <FaPlus className="w-4 h-4 cursor-pointer hover:text-white transition-colors" />
+                    </div>
                 </div>
 
-                <button
-                    className="relative bg-green-400 rounded-2xl w-30 hover:bg-green-300 transition-all"
-                >
-                    Notificações
+           
+                <div className="flex-1 overflow-y-auto">
 
-                    {notificacoes > 0 && (
-                        <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-2 py-1 text-xs">
-                            {notificacoes}
-                        </span>
-                    )}
-                </button>
-
-                <button
-                    className="bg-gray-600 w-30 rounded-2xl hover:bg-gray-400"
-                    onClick={() => setNotificacoes(0)}
-                >
-                    Limpar
-                </button>
-
-            </nav>
-
-            <nav>
-                <div className="w-full h-px bg-zinc-400"></div>
-            </nav>
-
-            <nav className="flex flex-col gap-4 ">
-
-                {menuItems.map(item => (
-                    <div key={item.id} className={`${item.id === 3 && ("border-t border-zinc-400 pt-3")}`}>
-                        <SidebarItem
-                            label={item.label}
-                            iconClass={item.iconClass}
-                            onClick={item.id === 3 ? Expandir : undefined}
-                        />
-
-                        {/* Mostra as playlists somente na Biblioteca */}
-                        {item.id === 3 &&  (
-
-                            <div className={` flex flex-col overflow-hidden gap-3 ml-4 mt-2 ${IsExpanded ? "h-full" : "h-[0%]"} duration-300 border-b border-zinc-400`}>
-                                {playlistData.map(playlist => (
-                                    <div
-                                        key={playlist.id}
-                                        className="flex items-center gap-3 rounded-lg bg-zinc-800 hover:bg-zinc-700 p-3">
-
-                                        <img
-                                            src={playlist.coverUrl}
-                                            alt={playlist.title}
-                                            className="w-10 h-10 rounded" />
-                                        <div>
-
-                                            <p className="text-white text-sm">
-                                                {playlist.title}
-                                            </p>
-
-                                            <p className="text-zinc-400 text-xs">
-                                                {playlist.description}
-                                            </p>
-                                        </div>
-                                    </div>
-                                ))}
+                 
+                    <div
+                        className={`flex flex-col gap-1 px-2 overflow-hidden transition-all ease-in-out duration-300 ${
+                            isExpanded ? "max-h-[2000px]" : "max-h-0"
+                        }`}
+                    >
+                        {playlistData.map(playlist => (
+                            <div
+                                key={playlist.id}
+                                className="flex items-center gap-3 rounded p-2 hover:bg-[#242424] cursor-pointer"
+                            >
+                                <img
+                                    src={playlist.coverUrl}
+                                    alt={playlist.title}
+                                    className="w-12 h-12 rounded object-cover"
+                                />
+                                <div className="min-w-0">
+                                    <p className="text-white text-sm truncate">{playlist.title}</p>
+                                    <p className="text-zinc-400 text-xs truncate">{playlist.description}</p>
+                                </div>
                             </div>
-                        )}
+                        ))}
                     </div>
-                ))}
 
-            </nav>
+                    {/* Cards de chamada (do vídeo) */}
+                    <div className="p-4 bg-[#242424] m-2 rounded font-semibold flex flex-col items-start gap-1">
+                        <h1>Crie sua primeira playlist</h1>
+                        <p className="font-light text-sm">É fácil, vamos te ajudar</p>
+                        <button className="px-4 py-1.5 bg-white text-[15px] text-black rounded-full mt-4 hover:scale-105 transition-transform cursor-pointer">
+                            Criar playlist
+                        </button>
+                    </div>
 
+                    <div className="p-4 bg-[#242424] m-2 rounded font-semibold flex flex-col items-start gap-1">
+                        <h1>Vamos encontrar alguns podcasts</h1>
+                        <p className="font-light text-sm">Avisaremos você sobre novos episódios</p>
+                        <button className="px-4 py-1.5 bg-white text-[15px] text-black rounded-full mt-4 hover:scale-105 transition-transform cursor-pointer">
+                            Explorar podcasts
+                        </button>
+                    </div>
+                </div>
+            </section>
         </aside>
     );
 }
