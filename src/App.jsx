@@ -3,7 +3,7 @@ import Sidebar from './components/Sidebar';
 import Player from './components/Player';
 
 import PlaylistCard from './components/PlaylistCard';
-import Header from './components/Header';
+import Navbar from './components/Navbar';
 import mockData from "./data/mockData"
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
         </div>
 
         <main className="flex-1 bg-zinc-900 rounded-lg m-2 p-6 overflow-y-auto">
-          <Header />
+          <Navbar />
           <h1 className="text-2xl font-bold mb-6">Boa tarde, Natan</h1>
 
           <p className='text-zinc-400 mb-4'> Seus álbuns serão exibidos aqui!</p>

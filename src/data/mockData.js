@@ -35,7 +35,7 @@ const mockData = [
         type: "podcast"
     },
      {
-        id: 5,
+        id: 6,
         title: "Fodase",
         description: "Seila man",
         coverUrl: "https://lh3.googleusercontent.com/a/ACg8ocKXGHdztP5dhTxSlxivJEW0IRxCOC0Avk_2ZnOa9TPH-IRqUw=s75-c-mo",
