@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import Player from './components/Player';
-import Gretting from './components/Welcome';
+
 import PlaylistCard from './components/PlaylistCard';
+import Header from './components/Header';
+import mockData from "./data/mockData"
 
 function App() {
   const [playlists, setPlaylists] = useState([]);
@@ -16,36 +18,6 @@ function App() {
         setIsLoading(true);
         // Exemplo: simulando um tempo de resposta de 1.5 segundos
         setTimeout(() => {
-          const mockData = [
-          {
-            id: 1,
-            title: "Racionais",
-            description: "Racionais Mcs e mais.",
-            coverUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDCeeJm_mTFKaPO3Gm6Ds6VlrNRDgZO_QLQtA2ULUL8A&s=10",
-            type: "album"
-          },
-          {
-            id: 2,
-            title: "Podpah",
-            description: "O maior podcast do Brasil",
-            coverUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgwQ_p6AW_7Eo6dJslk2zAAaPjuiA4ez7B3iccLez6ag&s=10",
-            type: "podcast"
-          },
-          {
-            id: 3,
-            title: "Rock",
-            description: "Rock pesado, AC/DC, Slipknot, System of a Down e mais..",
-            coverUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX1RhQHdOooes22gJinDPILVK6NhRiE2rVIRtC87AKQg&s=10",
-            type: "album"
-          }, 
-          {
-            id: 4,
-            title: "Flow Podcast",
-            description: "O segundo maior Podcast do Brasil, com Igor 3k e Jean",
-            coverUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuryOgeDesp82_SkZvG10Istjf5F4hJOYoCBzfW9eL8A&s=10",
-            type: "podcast"
-          }
-        ];
           setPlaylists(mockData);
           setIsLoading(false);
         }, 1500);
@@ -64,22 +36,26 @@ function App() {
   );
 
   return (
-    <div className='flex flex-col h-screen bg-black text-white'>
+    <div className='flex flex-col bg-black h-screen text-white'>
+
       <div className='flex flex-1 overflow-hidden'>
-        
+
         {/* Barra lateral fixa */}
         <Sidebar />
+        <div className='flex flex-col '>
+        </div>
 
         <main className="flex-1 bg-zinc-900 rounded-lg m-2 p-6 overflow-y-auto">
-          <Gretting name={"Natan"} />
-          
+          <Header />
+          <h1 className="text-2xl font-bold mb-6">Boa tarde, Natan</h1>
+
           <p className='text-zinc-400 mb-4'> Seus álbuns serão exibidos aqui!</p>
 
           <section>
             {/* Corrigido: text2xl -> text-2xl */}
             <h2 className='text-2xl font-bold text-white mb-4'>Feito para Natan</h2>
 
-            <input 
+            <input
               className="bg-zinc-800 p-2 rounded-lg mb-6 w-full max-w-md focus:outline-none focus:ring-2 focus:ring-green-500"
               type="text"
               placeholder="Pesquisar álbum..."
@@ -95,17 +71,17 @@ function App() {
                 </div>
               ) : (
                 <div className='flex flex-row flex-wrap gap-4 items-center justify-start'>
-                 {filteredPlaylists.length > 0 ? (
+                  {filteredPlaylists.length > 0 ? (
                     filteredPlaylists.map((album) => (
-                   <PlaylistCard 
-                     key={album.id} 
-                     title={album.title} 
-                      coverUrl={album.coverUrl} // CORRIGIDO: mudado de album.url para album.coverUrl
-                    />
-                   ))
-                ) : (
-                <p className="text-zinc-500">Nenhum álbum encontrado.</p>
-                 )}
+                      <PlaylistCard
+                        key={album.id}
+                        title={album.title}
+                        coverUrl={album.coverUrl} // CORRIGIDO: mudado de album.url para album.coverUrl
+                      />
+                    ))
+                  ) : (
+                    <p className="text-zinc-500">Nenhum álbum encontrado.</p>
+                  )}
                 </div>
               )}
             </div>

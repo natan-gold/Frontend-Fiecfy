@@ -1,6 +1,7 @@
 import SidebarItem from "./SidebarItem";
+import Logo from "./Logo";
 import { useState } from "react";
-import { playlistData } from "../data/mockData";
+import mockData from "../data/mockData";
 
 // Icons
 import { FaHouseChimney } from "react-icons/fa6";
@@ -17,8 +18,9 @@ function Sidebar() {
     const [isExpanded, setIsExpanded] = useState(true);
 
     return (
-    
-        <aside className="w-[25%] h-full p-2 flex flex-col gap-2 text-white hidden lg:flex">
+        <aside className="w-[25%] h-full p-2 flex-col gap-2 text-white hidden lg:flex">
+
+             <Logo/>
 
             <nav className="bg-[#121212] h-[15%] rounded flex flex-col justify-around">
                 {menuItems.map(item => (
@@ -58,7 +60,7 @@ function Sidebar() {
                             isExpanded ? "max-h-[2000px]" : "max-h-0"
                         }`}
                     >
-                        {playlistData.map(playlist => (
+                        {mockData.map(playlist => (
                             <div
                                 key={playlist.id}
                                 className="flex items-center gap-3 rounded p-2 hover:bg-[#242424] cursor-pointer"

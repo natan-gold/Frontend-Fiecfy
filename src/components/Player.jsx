@@ -1,4 +1,4 @@
-import BarradeProgresso from "./ProgressBar";
+import ProgressBar from "./ProgressBar";        
 
 import { useState } from "react";
 
@@ -28,26 +28,35 @@ function Player() {
                     <span>Lil Nas X</span>
                 </div>
             </div>
+            <div className="bg-amber-300/0 w-full flex justify-center items-center flex-col gap-3 ">
+                <div className="flex items-center justify-center w-1/2 gap-2">
+                    <button className="group w-8 h-8 rounded-full justify-center text-white hover:scale-105 transition-transform hover:text-green-400">
+                        <SkipBack
+                            fill="white"
+                            className="w-5 group-hover:fill-green-400"
+                        />
+                    </button>
 
-            <div className="flex items-center justify-center w-1/3 gap-6">
-                <button className="w-8 h-8 rounded-full  justify-center bg-white text-black hover:scale-105 transition-transform hover:bg-green-400">
-                    <i className="bi bi-skip-start-fill flex justify-center items-center"><SkipBack fill="black" className="w-5"/></i>
-                </button>
+                    <button className=" flex items-center w-8 h-8 mr-2 rounded-full justify-center bg-white text-black hover:scale-105 transition-transform  hover:bg-green-400"
+                        onClick={togglePlay}>
+                        {isPlaying ? <Play fill="black" className="w-4" /> : <Pause fill="black" className="w-4" />}
+                    </button>
 
-                <button className=" flex items-center w-8 h-8 rounded-full justify-center bg-white text-black hover:scale-105 transition-transform  hover:bg-green-400"
-                    onClick={togglePlay}>
-                    {isPlaying ? <Play fill="black" className="w-5" /> : <Pause fill="black" className="w-5" />}
-                </button>
+                    <button className="group w-8 h-8 rounded-full justify-center text-white hover:scale-105 transition-transform hover:text-green-400">
+                        <SkipForward
+                            fill="white"
+                            className="w-5 group-hover:fill-green-400"
+                        />
+                    </button>
+                </div>
 
-                <button className="w-8 h-8 rounded-full justify-center bg-white text-black hover:scale-105 transition-transform  hover:bg-green-400">
-                    <i className="bi bi-skip-end-fill flex justify-center items-center"><SkipForward fill="black" className="w-5"/></i>
-                </button>
+                <div className="flex items-center justify-end w-1/2">
+                    <ProgressBar />
+                </div>
             </div>
 
-            <div className="flex items-center justify-end w-1/3">
-
-                <BarradeProgresso />
-
+            <div>
+                Aqui vai estar o controle de volume!
             </div>
 
         </footer>
