@@ -49,11 +49,8 @@ function App() {
           <Navbar />
           <h1 className="text-2xl font-bold mb-6">Boa tarde, Natan</h1>
 
-          <p className='text-zinc-400 mb-4'> Seus álbuns serão exibidos aqui!</p>
-
           <section>
             {/* Corrigido: text2xl -> text-2xl */}
-            <h2 className='text-2xl font-bold text-white mb-4'>Feito para Natan</h2>
 
             <input
               className="bg-zinc-800 p-2 rounded-lg mb-6 w-full max-w-md focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -62,7 +59,7 @@ function App() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-
+            <h2 className='text-2xl font-bold text-white mb-4'>Feito para Natan</h2>
             {/* Container para os cards */}
             <div>
               {isLoading ? (

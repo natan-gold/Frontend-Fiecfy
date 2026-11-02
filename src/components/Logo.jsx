@@ -1,4 +1,4 @@
-import logoSpotify from "../assets/Spotify_icon.png"
+import logoSpotify from "../assets/Spotify_logo.png"
 
 function Logo () {
     return (
