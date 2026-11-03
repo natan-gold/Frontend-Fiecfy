@@ -1,5 +1,3 @@
-// src/data/tracks.js
-
 const tracks = [
     {
         id: 1,

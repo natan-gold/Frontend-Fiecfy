@@ -1,19 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import tracks from "../data/tracks";
 import ProgressBar from "./ProgressBar";
-
-import {
-  Play, Pause, SkipBack, SkipForward, Menu, MonitorSpeaker,
-  Volume2, Maximize2, MicVocal, SquarePlay, Shuffle, Repeat,
-} from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward, Menu, MonitorSpeaker, Volume2, Maximize2, MicVocal, SquarePlay, Shuffle, Repeat,} from "lucide-react";
 
 function Player() {
-  // 1) A REFERÊNCIA: caixa que vai guardar o <audio> REAL do DOM
+  //caixa que vai guardar o <audio> REAL do DOM
   const audioRef = useRef(null);
-  // (extra) caixa para lembrar "toque a próxima faixa" sem causar re-render
+
+  //toque a próxima faixa sem causar re-render
   const shouldAutoplay = useRef(false);
 
-  // 2) OS ESTADOS: o que a TELA mostra
   const [trackIndex, setTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -22,24 +18,22 @@ function Player() {
 
   const track = tracks[trackIndex];
 
-  // 3) CONTROLE IMPERATIVO: mandamos o <audio> tocar/pausar
+  //IMPERATIVO: mandamos o <audio> tocar/pausar
   async function togglePlay() {
     const audio = audioRef.current;
     if (!audio) return;
-
     if (audio.paused) {
       try {
-        await audio.play(); // play() devolve uma Promise e pode ser recusado
+        await audio.play();
       } catch (err) {
         console.error("Não foi possível tocar:", err);
       }
     } else {
       audio.pause();
     }
-    // Repare: NÃO damos setIsPlaying aqui. Os eventos onPlay/onPause (no <audio>) fazem isso.
   }
 
-  // (extra) trocar de faixa
+  //trocar de faixa
   function goTo(index, autoplay) {
     shouldAutoplay.current = autoplay;
     setCurrentTime(0);
@@ -49,27 +43,26 @@ function Player() {
   const next = () => goTo(trackIndex + 1, isPlaying);
   const prev = () => goTo(trackIndex - 1, isPlaying);
 
-  // quando a faixa muda, o <audio> recarrega e para: se estava tocando, tocamos de novo
+  //a faixa muda o <audio> recarrega e para se estava tocando
   useEffect(() => {
     if (shouldAutoplay.current) {
       audioRef.current?.play().catch(() => {});
     }
   }, [trackIndex]);
 
-  // (extra) pular para um ponto da música
+  //pular para um ponto da música
   function seek(seconds) {
     audioRef.current.currentTime = seconds;
     setCurrentTime(seconds);
   }
 
-  // (extra) volume: a propriedade volume vai de 0 a 1
+  //volume vai de 0 a 1
   function changeVolume(e) {
     const v = Number(e.target.value);
     audioRef.current.volume = v;
     setVolume(v);
   }
 
-  // (extra surpresa) teclas de mídia do teclado e painel do sistema
   useEffect(() => {
     if (!("mediaSession" in navigator)) return;
     navigator.mediaSession.metadata = new MediaMetadata({
@@ -85,7 +78,6 @@ function Player() {
 
   return (
     <footer className="h-20 bg-black border-t border-zinc-800 px-4 flex items-center justify-center font-bold">
-      {/* O elemento de áudio: não aparece na tela (não tem "controls"), só toca */}
       <audio
         ref={audioRef}
         src={track.audioUrl}
@@ -119,7 +111,6 @@ function Player() {
             <SkipBack fill="white" className="w-5 group-hover:fill-green-400" />
           </button>
 
-          {/* O ícone SEGUE o estado: tocando -> mostra Pause; pausado -> mostra Play */}
           <button
             className="flex cursor-pointer items-center w-8 h-8 mr-2 rounded-full justify-center bg-white text-black hover:scale-105 transition-transform hover:bg-green-400"
             onClick={togglePlay}
