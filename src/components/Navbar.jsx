@@ -20,7 +20,7 @@ function Navbar() {
           Seja Premium
         </button>
         <button className="h-8 cursor-pointer bg-black text-[15px] text-white font-bold px-3 py-1 rounded-full hover:scale-105 transition-transform text-sm ">
-          Intalar App
+          Intalar Aplicativo
         </button>
 
         <div className='bg-red-600 text-black w-8 h-8 rounded-full flex items-center justify-center'>

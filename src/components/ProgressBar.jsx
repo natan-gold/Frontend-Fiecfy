@@ -8,12 +8,12 @@ function formatTime(seconds) {
 }
 
 function ProgressBar({ currentTime, duration, onSeek }) {
-  // 2º uso do useRef: medir a barra real no DOM para saber onde o usuário clicou
+  //useRef: medir a barra real no DOM para saber onde o usuário clicou
   const barRef = useRef(null);
   const percent = duration ? (currentTime / duration) * 100 : 0;
 
   function handleClick(e) {
-    if (!duration) return; // duration é NaN/0 até o áudio carregar
+    if (!duration) return;
     const rect = barRef.current.getBoundingClientRect();
     const ratio = (e.clientX - rect.left) / rect.width; // 0 a 1
     onSeek(ratio * duration);

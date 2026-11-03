@@ -27,20 +27,6 @@ const mockData = [
         coverUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuryOgeDesp82_SkZvG10Istjf5F4hJOYoCBzfW9eL8A&s=10",
         type: "podcast"
     },
-    {
-        id: 5,
-        title: "Fodase",
-        description: "Seila man",
-        coverUrl: "https://lh3.googleusercontent.com/a/ACg8ocKXGHdztP5dhTxSlxivJEW0IRxCOC0Avk_2ZnOa9TPH-IRqUw=s75-c-mo",
-        type: "podcast"
-    },
-     {
-        id: 6,
-        title: "Fodase",
-        description: "Seila man",
-        coverUrl: "https://lh3.googleusercontent.com/a/ACg8ocKXGHdztP5dhTxSlxivJEW0IRxCOC0Avk_2ZnOa9TPH-IRqUw=s75-c-mo",
-        type: "podcast"
-    }
 ]
 
 export default mockData
